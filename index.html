@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Money</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- หน้าหลัก -->
+    <section id="homePage" class="page">
+
+        <div class="container">
+
+            <h1>💰 Save Money</h1>
+
+            <div id="goalList"></div>
+
+        </div>
+
+    </section>
+
+    <!-- เป้าหมาย -->
+    <section id="goalPage" class="page" style="display:none;">
+
+        <div class="container">
+
+            <div class="card">
+
+                <h2>🎯 เพิ่มเป้าหมาย</h2>
+
+                <form id="goalForm">
+
+                    <input type="text"
+                        id="goalName"
+                        placeholder="ชื่อเป้าหมาย"
+                        required>
+
+                    <input type="number"
+                        id="goalAmount"
+                        placeholder="จำนวนเงินเป้าหมาย"
+                        required>
+
+                    <button type="submit">
+                        เพิ่มเป้าหมาย
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ออมเงิน -->
+    <section id="savePage" class="page" style="display:none;">
+
+        <div class="container">
+
+            <div class="card">
+
+                <h2>💵 เพิ่มเงินออม</h2>
+
+                <select id="goalSelect">
+                    <option value="">เลือกเป้าหมาย</option>
+                </select>
+
+                <input type="number"
+                    id="savingAmount"
+                    placeholder="จำนวนเงิน">
+
+                <button id="saveBtn">
+                    เพิ่มเงินออม
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ประวัติ -->
+    <section id="historyPage" class="page" style="display:none;">
+
+        <div class="container">
+
+            <div class="card">
+
+                <h2>📜 ประวัติการออม</h2>
+
+                <ul id="historyList"></ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- เมนู -->
+    <section id="menuPage" class="page" style="display:none;">
+
+        <div class="container">
+
+            <div class="card">
+
+                <h2>⚙️ เมนู</h2>
+
+                <p>ตั้งค่าแอป</p>
+
+                <button onclick="localStorage.clear();location.reload();">
+                    ล้างข้อมูลทั้งหมด
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <nav class="bottom-nav">
+
+        <button onclick="showPage('homePage')">
+            <i class="fa-solid fa-house"></i>
+            <small>หน้าหลัก</small>
+        </button>
+
+        <button onclick="showPage('goalPage')">
+            <i class="fa-solid fa-bullseye"></i>
+            <small>เป้าหมาย</small>
+        </button>
+
+        <button onclick="showPage('savePage')">
+            <i class="fa-solid fa-wallet"></i>
+            <small>ออมเงิน</small>
+        </button>
+
+        <button onclick="showPage('historyPage')">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <small>ประวัติ</small>
+        </button>
+
+        <button onclick="showPage('menuPage')">
+            <i class="fa-solid fa-bars"></i>
+            <small>เมนู</small>
+        </button>
+
+    </nav>
+
+    <script>
+        function showPage(pageId) {
+
+            document.querySelectorAll(".page")
+                .forEach(page => {
+                    page.style.display = "none";
+                });
+
+            document.getElementById(pageId)
+                .style.display = "block";
+        }
+    </script>
+
+    <script src="app.js"></script>
+
+</body>
+
+
+</html>
