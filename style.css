@@ -1,295 +1,432 @@
-/* =========================
-   RESET
-========================= */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root {
+    --bg-color: #ebf2fa;
+    --card-bg: #ffffff;
+    --text-color: #2c3e50;
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --primary-light: #e3f2fd;
+    --accent-color: #00d2d3;
+    --border-color: #dcdde1;
+    --success-color: #2ecc71;
 }
 
-/* =========================
-   BODY
-========================= */
-body{
-    font-family:"Segoe UI",sans-serif;
-    background:#f4f7fb;
-    color:#333;
-
-    max-width:430px;
-    margin:auto;
-
-    min-height:100vh;
-    position:relative;
+[data-theme="dark"] {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-color: #f8fafc;
+    --primary-color: #38bdf8;
+    --primary-dark: #0284c7;
+    --primary-light: #0f2d4a;
+    --accent-color: #00f2fe;
+    --border-color: #334155;
+    --success-color: #4ade80;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-.container{
-    padding:20px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* =========================
-   PAGE
-========================= */
-.page{
-    padding-bottom:90px;
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding-top: 80px;
+    padding-bottom: 90px;
+    overflow-x: hidden;
 }
 
-/* =========================
-   TITLE
-========================= */
-h1{
-    text-align:center;
-    margin-bottom:25px;
-    color:#2c3e50;
+.container {
+    padding: 15px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-h2{
-    color:#34495e;
-    margin-bottom:15px;
-}
-
-h3{
-    color:#2c3e50;
-    margin-bottom:10px;
-}
-
-/* =========================
-   CARD
-========================= */
-.card{
-    background:#fff;
-    border-radius:15px;
-    padding:20px;
-    margin-bottom:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-/* =========================
-   INPUT
-========================= */
-input,
-select{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-
-    border:1px solid #ddd;
-    border-radius:10px;
-
-    outline:none;
-
-    transition:.3s;
-}
-
-input:focus,
-select:focus{
-    border-color:#4CAF50;
-}
-
-/* =========================
-   BUTTON
-========================= */
-button{
-    width:100%;
-    padding:12px;
-    margin-top:12px;
-
-    border:none;
-    border-radius:10px;
-
-    background:#4CAF50;
-    color:#fff;
-
-    font-size:15px;
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-button:hover{
-    background:#43a047;
-}
-
-/* =========================
-   GOAL CARD
-========================= */
-.goal-card{
-    background:#fff;
-    border-radius:15px;
-    padding:20px;
-    margin-bottom:15px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-.goal-card p{
-    margin-bottom:10px;
-}
-
-/* =========================
-   PROGRESS BAR
-========================= */
-.progress{
-    width:100%;
-    height:22px;
-
-    background:#e0e0e0;
-    border-radius:20px;
-
-    overflow:hidden;
-
-    margin-top:10px;
-}
-
-.progress-bar{
-    height:100%;
-
-    background:linear-gradient(
-        90deg,
-        #4CAF50,
-        #81C784
-    );
-
-    border-radius:20px;
-
-    transition:.5s;
-}
-
-/* =========================
-   COMPLETE
-========================= */
-.goal-complete{
-    color:#27ae60;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-/* =========================
-   DELETE BUTTON
-========================= */
-.delete-btn{
-    background:#e74c3c;
-}
-
-.delete-btn:hover{
-    background:#c0392b;
-}
-
-/* =========================
-   HISTORY
-========================= */
-#historyList{
-    list-style:none;
-}
-
-#historyList li{
-    background:#fff;
-    padding:12px;
-    margin-bottom:10px;
-
-    border-radius:10px;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
-}
-
-#historyList small{
-    color:#777;
-}
-
-/* =========================
-   BOTTOM NAV
-========================= */
-.bottom-nav{
-    position:fixed;
-
-    bottom:0;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:100%;
-    max-width:430px;
-
-    height:70px;
-
-    background:#fff;
-
-    display:flex;
-
-    box-shadow:0 -2px 10px rgba(0,0,0,.1);
-
-    z-index:999;
-}
-
-.bottom-nav button{
-    flex:1;
-
-    margin:0;
-    padding:0;
-
-    border:none;
-    border-radius:0;
-
-    background:none;
-    color:#555;
-
-    display:flex;
-    flex-direction:column;
-
-    justify-content:center;
-    align-items:center;
-}
-
-.bottom-nav button:hover{
-    background:#f5f5f5;
-}
-
-.bottom-nav i{
-    font-size:22px;
-    margin-bottom:4px;
-}
-
-.bottom-nav small{
-    font-size:11px;
-}
-
-/* =========================
-   SCROLLBAR
-========================= */
-::-webkit-scrollbar{
-    width:6px;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#cfcfcf;
-    border-radius:10px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-@media(max-width:768px){
-
-    body{
-        max-width:100%;
+/* --- แอนิเมชันแกนหลัก --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
-
-    .container{
-        padding:15px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    .card,
-    .goal-card{
-        padding:15px;
-    }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
 
-    h1{
-        font-size:28px;
-    }
+@keyframes shine {
+    0% { background-position: -200% 50%; }
+    100% { background-position: 200% 50%; }
+}
 
-    h2{
-        font-size:22px;
-    }
+/* การเปลี่ยนหน้าแบบนุ่มนวล */
+.page {
+    animation: fadeInUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* แถบระดับผู้ใช้ด้านบน */
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.user-level-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
+    margin-right: 12px;
+}
+
+.lv-text {
+    font-weight: 800;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+}
+
+.xp-bar-container {
+    background-color: var(--border-color);
+    height: 22px;
+    border-radius: 11px;
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.xp-bar-fill {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    height: 100%;
+    width: 0%;
+    border-radius: 11px;
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.xp-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+    mix-blend-mode: difference; /* ปรับสีตัวอักษรอัตโนมัติตามพื้นหลัง */
+}
+
+.buff-badge {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 2px 8px rgba(155, 89, 182, 0.4);
+}
+
+.checkin-btn {
+    background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 159, 67, 0.3);
+    transition: transform 0.2s;
+}
+
+.checkin-btn:active {
+    transform: scale(0.95);
+}
+
+.checkin-btn:disabled {
+    background: #cccccc !important;
+    color: #666666;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* การ์ดและฟอร์ม */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+    border: 1px solid var(--border-color);
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.danger-btn {
+    background-color: #ff4d4d;
+    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.2);
+}
+.danger-btn:hover { background-color: #ff1a1a; }
+
+/* อัปโหลดรูปภาพ */
+.file-upload-box {
+    border: 2px dashed var(--primary-color);
+    background-color: var(--primary-light);
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    cursor: pointer;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 160px;
+    margin-top: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* การ์ดเป้าหมาย */
+.goal-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.01);
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+.goal-image-container {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+.goal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.goal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.progress-container {
+    background-color: var(--border-color);
+    height: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+    height: 100%;
+    width: 0%;
+    border-radius: 8px;
+    transition: width 0.8s cubic-bezier(0.1, 1, 0.1, 1);
+}
+
+.goal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.goal-actions button {
+    padding: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.edit-btn { background-color: #f1c40f; box-shadow: 0 3px 8px rgba(241, 196, 15, 0.2); }
+.edit-btn:hover { background-color: #d4ac0d; }
+.delete-btn { background-color: #e74c3c; box-shadow: 0 3px 8px rgba(231, 76, 60, 0.2); }
+.delete-btn:hover { background-color: #c0392b; }
+
+/* ประวัติ */
+#historyList li {
+    padding: 14px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeInUp 0.3s ease;
+}
+
+#historyList li small {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* สลับ Theme */
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.menu-item button { width: auto; margin-bottom: 0; }
+
+/* เมนูด้านล่าง */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 75px;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+}
+
+.bottom-nav button {
+    background: none;
+    color: var(--text-color);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.3rem;
+    cursor: pointer;
+    width: auto;
+    padding: 8px;
+    margin-bottom: 0;
+    box-shadow: none;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+}
+
+.bottom-nav button small {
+    font-size: 0.75rem;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.bottom-nav button.active-nav, .bottom-nav button:hover {
+    color: var(--primary-color);
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* --- เลเวลอัป Custom Popup Modal --- */
+.lvl-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.lvl-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.lvl-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 340px;
+    width: 90%;
+    border: 2px solid var(--primary-color);
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.lvl-modal.active .lvl-card {
+    transform: scale(1);
+}
+.lvl-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: pulse 1s infinite;
 }

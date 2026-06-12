@@ -1,171 +1,126 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save Money</title>
+    <title>Save Money App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
 
-    <!-- หน้าหลัก -->
-    <section id="homePage" class="page">
-
-        <div class="container">
-
-            <h1>💰 Save Money</h1>
-
-            <div id="goalList"></div>
-
-        </div>
-
-    </section>
-
-    <!-- เป้าหมาย -->
-    <section id="goalPage" class="page" style="display:none;">
-
-        <div class="container">
-
-            <div class="card">
-
-                <h2>🎯 เพิ่มเป้าหมาย</h2>
-
-                <form id="goalForm">
-
-                    <input type="text"
-                        id="goalName"
-                        placeholder="ชื่อเป้าหมาย"
-                        required>
-
-                    <input type="number"
-                        id="goalAmount"
-                        placeholder="จำนวนเงินเป้าหมาย"
-                        required>
-
-                    <button type="submit">
-                        เพิ่มเป้าหมาย
-                    </button>
-
-                </form>
-
+    <header class="top-header">
+        <div class="user-level-box">
+            <span class="lv-text" id="currentLevel">LV. 1</span>
+            <div class="xp-bar-container">
+                <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
+                <small class="xp-text" id="xpText">XP 0 / 50 (0%)</small>
             </div>
-
+            <div id="buffBadge" class="buff-badge" style="display: none;">💎 XP x1.5</div>
         </div>
+        <button id="checkInBtn" class="checkin-btn">🔥 เช็กอินรายวัน</button>
+    </header>
 
+    <section id="homePage" class="page">
+        <div class="container">
+            <h1>💙 คลังเงินออม</h1>
+            <div id="goalList" class="goal-list"></div>
+        </div>
     </section>
 
-    <!-- ออมเงิน -->
-    <section id="savePage" class="page" style="display:none;">
-
+    <section id="goalPage" class="page" style="display:none;">
         <div class="container">
-
             <div class="card">
+                <h2 id="formTitle">🎯 เพิ่มเป้าหมายออมเงิน</h2>
+                <form id="goalForm">
+                    <input type="hidden" id="editGoalId">
+                    <input type="text" id="goalName" placeholder="ชื่อเป้าหมาย เช่น ซื้อคอมพิวเตอร์" required>
+                    <input type="number" id="goalAmount" placeholder="จำนวนเงินเป้าหมาย (บาท)" required min="1">
+                    
+                    <div class="file-upload-box" onclick="document.getElementById('goalImage').click()">
+                        <label for="goalImage" style="cursor:pointer;"><i class="fa-solid fa-image" style="color:var(--primary-color);"></i> เลือกรูปภาพเป้าหมาย (ถ้ามี)</label>
+                        <input type="file" id="goalImage" accept="image/*">
+                        <div id="imagePreview" class="image-preview"></div>
+                    </div>
 
-                <h2>💵 เพิ่มเงินออม</h2>
+                    <button type="submit" id="submitGoalBtn">สร้างเป้าหมายใหม่</button>
+                    <button type="button" id="cancelEditBtn" style="display:none; background-color: #7f8c8d; margin-top: 5px;">ยกเลิกการแก้ไข</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
+    <section id="savePage" class="page" style="display:none;">
+        <div class="container">
+            <div class="card">
+                <h2>💵 บันทึกการเพิ่มเงินออม</h2>
                 <select id="goalSelect">
                     <option value="">เลือกเป้าหมาย</option>
                 </select>
-
-                <input type="number"
-                    id="savingAmount"
-                    placeholder="จำนวนเงิน">
-
-                <button id="saveBtn">
-                    เพิ่มเงินออม
-                </button>
-
+                <input type="number" id="savingAmount" placeholder="ระบุจำนวนเงินฝากออม (บาท)" min="1">
+                <button id="saveBtn">[ + เพิ่มเงินเข้ากระปุก ]</button>
             </div>
-
         </div>
-
     </section>
 
-    <!-- ประวัติ -->
     <section id="historyPage" class="page" style="display:none;">
-
         <div class="container">
-
             <div class="card">
-
-                <h2>📜 ประวัติการออม</h2>
-
+                <h2>📜 บันทึกไทม์ไลน์การออม</h2>
                 <ul id="historyList"></ul>
-
             </div>
-
         </div>
-
     </section>
 
-    <!-- เมนู -->
     <section id="menuPage" class="page" style="display:none;">
-
         <div class="container">
-
             <div class="card">
-
-                <h2>⚙️ เมนู</h2>
-
-                <p>ตั้งค่าแอป</p>
-
-                <button onclick="localStorage.clear();location.reload();">
-                    ล้างข้อมูลทั้งหมด
-                </button>
-
+                <h2>⚙️ ตั้งค่าระบบ</h2>
+                
+                <div class="menu-item">
+                    <label style="font-weight: 600;">โหมดอินเตอร์เฟส:</label>
+                    <button id="themeToggleBtn" class="toggle-btn">🌞 Light Mode</button>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 20px 0;">
+                <p style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px;">🚨 โซนล้างข้อมูล</p>
+                <button class="danger-btn" id="resetAppBtn">ล้างข้อมูลทั้งหมดในเครื่อง</button>
             </div>
-
         </div>
-
     </section>
 
     <nav class="bottom-nav">
-
-        <button onclick="showPage('homePage')">
+        <button id="nav-homePage" onclick="showPage('homePage')">
             <i class="fa-solid fa-house"></i>
             <small>หน้าหลัก</small>
         </button>
-
-        <button onclick="showPage('goalPage')">
+        <button id="nav-goalPage" onclick="showPage('goalPage')">
             <i class="fa-solid fa-bullseye"></i>
             <small>เป้าหมาย</small>
         </button>
-
-        <button onclick="showPage('savePage')">
+        <button id="nav-savePage" onclick="showPage('savePage')">
             <i class="fa-solid fa-wallet"></i>
             <small>ออมเงิน</small>
         </button>
-
-        <button onclick="showPage('historyPage')">
+        <button id="nav-historyPage" onclick="showPage('historyPage')">
             <i class="fa-solid fa-clock-rotate-left"></i>
             <small>ประวัติ</small>
         </button>
-
-        <button onclick="showPage('menuPage')">
+        <button id="nav-menuPage" onclick="showPage('menuPage')">
             <i class="fa-solid fa-bars"></i>
             <small>เมนู</small>
         </button>
-
     </nav>
 
-    <script>
-        function showPage(pageId) {
-
-            document.querySelectorAll(".page")
-                .forEach(page => {
-                    page.style.display = "none";
-                });
-
-            document.getElementById(pageId)
-                .style.display = "block";
-        }
-    </script>
+    <div id="levelUpModal" class="lvl-modal">
+        <div class="lvl-card">
+            <div class="lvl-icon">🏆</div>
+            <h2 style="color: var(--primary-color); margin-bottom: 5px;">LEVEL UP!</h2>
+            <p id="lvlModalText" style="font-weight: 600; margin-bottom: 20px;">เลเวลของคุณเพิ่มขึ้นแล้ว</p>
+            <button onclick="closeLvlModal()" style="margin-bottom:0;">ลุยต่อเลย!</button>
+        </div>
+    </div>
 
     <script src="app.js"></script>
-
 </body>
-
-
 </html>
